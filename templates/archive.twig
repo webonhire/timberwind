@@ -1,9 +1,12 @@
 {# This file demonstrates using most of the index.twig template and modifying 
    just a small part. See `search.twig` for an example of another approach #}
 
-{% extends "index.twig" %}
+{% extends "base.twig" %}
 
 {% block content %}
-  <h3>This is my archive</h3>
-  {{ parent() }}
+	{% for post in posts %}
+		{% include ['tease.twig'] %}
+	{% endfor %}
+	
+	{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
 {% endblock %}
